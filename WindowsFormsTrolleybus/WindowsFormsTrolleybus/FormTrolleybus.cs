@@ -37,8 +37,8 @@ namespace WindowsFormsTrolleybus
             Random rnd = new Random();
             trolleybus = new Trolleybus();
             trolleybus.Init(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Orange,
-            Color.Yellow, true, true); trolleybus.SetPosition(rnd.Next(10, 100),
-            rnd.Next(10, 100), pictureBoxTrolleybus.Width, pictureBoxTrolleybus.Height);
+            Color.Yellow, true, true, true); trolleybus.SetPosition(rnd.Next(20, 100),
+            rnd.Next(30, 100), pictureBoxTrolleybus.Width, pictureBoxTrolleybus.Height);
             Draw();
         }
         /// <summary>

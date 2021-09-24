@@ -28,11 +28,11 @@ namespace WindowsFormsTrolleybus
         /// <summary>
         /// Ширина отрисовки троллейбуса
         /// </summary>
-        private readonly int trolleybusWidth = 100;
+        private readonly int trolleybusWidth = 150;
         /// <summary>
         /// Высота отрисовки троллейбуса
         /// </summary>
-        private readonly int trolleybusHeight = 60;
+        private readonly int trolleybusHeight = 48;
         /// <summary>
         /// Максимальная скорость
         /// </summary>
@@ -58,16 +58,21 @@ namespace WindowsFormsTrolleybus
         /// </summary>
         public bool SideLine { private set; get; }
         /// <summary>
+        /// Признак наличия штанги линии
+        /// </summary>
+        public bool Barbell { private set; get; }
+        /// <summary>
         /// Инициализация свойств
         /// </summary>
         /// <param name="maxSpeed">Максимальная скорость</param>
         /// <param name="weight">Вес автомобиля</param>
         /// <param name="mainColor">Основной цвет кузова</param>
         /// <param name="dopColor">Дополнительный цвет</param>
-        /// <param name="frontSpoiler">Признак наличия переднего спойлера</param>
-        /// <param name="sideSpoiler">Признак наличия боковых спойлеров</param>
+        /// <param name="headlights">Признак наличия фар</param>
+        /// <param name="sideLine">Признак наличия боковых линий</param>
+        /// <param name="barbell">Признак наличия боковых линий</param>
         public void Init(int maxSpeed, float weight, Color mainColor, Color dopColor,
-        bool headlights, bool sideLine)
+        bool headlights, bool sideLine, bool barbell)
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
@@ -75,6 +80,7 @@ namespace WindowsFormsTrolleybus
             DopColor = dopColor;
             Headlights = headlights;
             SideLine = sideLine;
+            Barbell = barbell;
         }
         /// <summary>
         /// Установка позиции автомобиля
@@ -118,7 +124,7 @@ namespace WindowsFormsTrolleybus
                     break;
                 //вверх
                 case Direction.Up:
-                    if (_startPosY + step > step)
+                    if (_startPosY + step > 0)
                     {
                         _startPosY -= step;
                     }
@@ -143,54 +149,63 @@ namespace WindowsFormsTrolleybus
         {
             Pen black_pen = new Pen(Color.Black);
 
+            int y = -48;
+           
             //Кузов троллейбуса
             Brush br = new SolidBrush(MainColor);
-            g.DrawRectangle(black_pen, _startPosX, _startPosY, 160, 50);
-            g.FillRectangle(br, _startPosX + 1, _startPosY + 1, 159, 49);
+            g.DrawRectangle(black_pen, _startPosX, _startPosY - y, 160, 50);
+            g.FillRectangle(br, _startPosX + 1, _startPosY + 1 - y, 159, 49);
 
-            // Боковой спойлер 
+            //Штанга троллейбуса
+            if (Barbell)
+            {
+                g.DrawLine(black_pen, _startPosX + 40, _startPosY - y , _startPosX - 10, _startPosY - 30 - y);
+                g.DrawLine(black_pen, _startPosX + 45, _startPosY - y, _startPosX - 5, _startPosY - 30 - y);
+            }
+
+            // Боковая линия
             if (SideLine)
             {
                 Brush br_dop = new SolidBrush(DopColor);
-                g.DrawRectangle(black_pen, _startPosX, _startPosY + 15, 160, 10);
-                g.DrawRectangle(black_pen, _startPosX, _startPosY + 30, 160, 10);
-                g.FillRectangle(br_dop, _startPosX + 1, _startPosY + 16, 159, 9);
-                g.FillRectangle(br_dop, _startPosX + 1, _startPosY + 31, 159, 9);
+                g.DrawRectangle(black_pen, _startPosX, _startPosY + 15 - y, 160, 10);
+                g.DrawRectangle(black_pen, _startPosX, _startPosY + 30 - y, 160, 10);
+                g.FillRectangle(br_dop, _startPosX + 1, _startPosY + 16 - y, 159, 9);
+                g.FillRectangle(br_dop, _startPosX + 1, _startPosY + 31 - y, 159, 9);
             }
 
             //Дверь
-            g.DrawRectangle(black_pen, _startPosX + 45, _startPosY + 20, 20, 30);
-            g.FillRectangle(br, _startPosX + 46, _startPosY + 21, 19, 29);
+            g.DrawRectangle(black_pen, _startPosX + 45, _startPosY + 20 - y, 20, 30);
+            g.FillRectangle(br, _startPosX + 46, _startPosY + 21 - y, 19, 29);
 
             //Колёса троллейбуса
             Brush brWhite = new SolidBrush(Color.White);
-            g.DrawEllipse(black_pen, _startPosX + 20, _startPosY + 45, 20, 20);
-            g.DrawEllipse(black_pen, _startPosX + 120, _startPosY + 45, 20, 20);
-            g.FillEllipse(brWhite, _startPosX + 21, _startPosY + 46, 18, 18);
-            g.FillEllipse(brWhite, _startPosX + 121, _startPosY + 46, 18, 18);
+            g.DrawEllipse(black_pen, _startPosX + 20, _startPosY + 45 - y, 20, 20);
+            g.DrawEllipse(black_pen, _startPosX + 120, _startPosY + 45 - y, 20, 20);
+            g.FillEllipse(brWhite, _startPosX + 21, _startPosY + 46 - y, 18, 18);
+            g.FillEllipse(brWhite, _startPosX + 121, _startPosY + 46 - y, 18, 18);
 
 
             Pen blue_pen = new Pen(Color.CornflowerBlue);
             //Окна
-            g.DrawEllipse(blue_pen, _startPosX + 3, _startPosY + 5, 18, 25);
-            g.DrawEllipse(blue_pen, _startPosX + 24, _startPosY + 5, 18, 25);
-            g.DrawEllipse(blue_pen, _startPosX + 68, _startPosY + 5, 18, 25);
-            g.DrawEllipse(blue_pen, _startPosX + 92, _startPosY + 5, 18, 25);
-            g.DrawEllipse(blue_pen, _startPosX + 116, _startPosY + 5, 18, 25);
-            g.DrawEllipse(blue_pen, _startPosX + 140, _startPosY + 5, 18, 25);
-            g.FillEllipse(brWhite, _startPosX + 4, _startPosY + 6, 17, 23);
-            g.FillEllipse(brWhite, _startPosX + 25, _startPosY + 6, 17, 23);
-            g.FillEllipse(brWhite, _startPosX + 69, _startPosY + 6, 17, 23);
-            g.FillEllipse(brWhite, _startPosX + 93, _startPosY + 6, 17, 23);
-            g.FillEllipse(brWhite, _startPosX + 117, _startPosY + 6, 17, 23);
-            g.FillEllipse(brWhite, _startPosX + 141, _startPosY + 6, 17, 23);
+            g.DrawEllipse(blue_pen, _startPosX + 3, _startPosY + 5 - y, 18, 25);
+            g.DrawEllipse(blue_pen, _startPosX + 24, _startPosY + 5 - y, 18, 25);
+            g.DrawEllipse(blue_pen, _startPosX + 68, _startPosY + 5 - y, 18, 25);
+            g.DrawEllipse(blue_pen, _startPosX + 92, _startPosY + 5 - y, 18, 25);
+            g.DrawEllipse(blue_pen, _startPosX + 116, _startPosY + 5 - y, 18, 25);
+            g.DrawEllipse(blue_pen, _startPosX + 140, _startPosY + 5 - y, 18, 25);
+            g.FillEllipse(brWhite, _startPosX + 4, _startPosY + 6 - y, 17, 23);
+            g.FillEllipse(brWhite, _startPosX + 25, _startPosY + 6 - y, 17, 23);
+            g.FillEllipse(brWhite, _startPosX + 69, _startPosY + 6 - y, 17, 23);
+            g.FillEllipse(brWhite, _startPosX + 93, _startPosY + 6 - y, 17, 23);
+            g.FillEllipse(brWhite, _startPosX + 117, _startPosY + 6 - y, 17, 23);
+            g.FillEllipse(brWhite, _startPosX + 141, _startPosY + 6 - y, 17, 23);
 
             // Фары
             if (Headlights)
             {
                 br = new SolidBrush(DopColor);
-                g.DrawEllipse(black_pen, _startPosX + 150, _startPosY + 40, 8, 8);
-                g.FillEllipse(br, _startPosX + 150, _startPosY + 40, 8, 8);
+                g.DrawEllipse(black_pen, _startPosX + 150, _startPosY + 40 - y, 8, 8);
+                g.FillEllipse(br, _startPosX + 150, _startPosY + 40 - y, 8, 8);
 
 
             }
