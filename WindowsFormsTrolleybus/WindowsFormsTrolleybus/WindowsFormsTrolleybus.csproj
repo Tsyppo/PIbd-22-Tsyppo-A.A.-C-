@@ -53,9 +53,12 @@
     <Compile Include="FormTrolleybus.Designer.cs">
       <DependentUpon>FormTrolleybus.cs</DependentUpon>
     </Compile>
+    <Compile Include="ITransport.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Bus.cs" />
     <Compile Include="Trolleybus.cs" />
+    <Compile Include="Vehicle.cs" />
     <EmbeddedResource Include="FormTrolleybus.resx">
       <DependentUpon>FormTrolleybus.cs</DependentUpon>
     </EmbeddedResource>
