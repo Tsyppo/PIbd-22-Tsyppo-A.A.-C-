@@ -21,7 +21,7 @@ namespace WindowsFormsTrolleybus
             InitializeComponent();
         }
         /// <summary>
-        /// Метод отрисовки машины
+        /// Метод отрисовки троллейбуса
         /// </summary>
         private void Draw()
         {
@@ -42,7 +42,7 @@ namespace WindowsFormsTrolleybus
             Draw();
         }
         /// <summary>
-        /// Обработка нажатия кнопки "Создать гоночный автомобиль"
+        /// Обработка нажатия кнопки "Создать троллейбус"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

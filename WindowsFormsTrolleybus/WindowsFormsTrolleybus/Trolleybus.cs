@@ -48,7 +48,7 @@ namespace WindowsFormsTrolleybus
         }
 
         /// <summary>
-        /// Отрисовка автомобиля
+        /// Отрисовка троллейбуса
         /// </summary>
         /// <param name="g"></param>
         public override void DrawTransport(Graphics g)
