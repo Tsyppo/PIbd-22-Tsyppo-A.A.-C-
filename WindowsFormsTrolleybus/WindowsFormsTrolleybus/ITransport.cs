@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace WindowsFormsTrolleybus
 {
-    interface ITransport
+    public interface ITransport
     {
         /// <summary>
         /// Установка позиции

@@ -20,6 +20,16 @@ namespace WindowsFormsTrolleybus
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// Передача машины на форму
+        /// </summary>
+        /// <param name="car"></param>
+        public void SetBus(ITransport bus)
+        {
+            this.trolleybus = bus;
+            Draw();
+        }
         /// <summary>
         /// Метод отрисовки троллейбуса
         /// </summary>
@@ -27,7 +37,7 @@ namespace WindowsFormsTrolleybus
         {
             Bitmap bmp = new Bitmap(pictureBoxTrolleybus.Width, pictureBoxTrolleybus.Height);
             Graphics gr = Graphics.FromImage(bmp);
-            trolleybus.DrawTransport(gr);
+            trolleybus?.DrawTransport(gr);
             pictureBoxTrolleybus.Image = bmp;
         }
 
@@ -81,5 +91,7 @@ namespace WindowsFormsTrolleybus
             }
             Draw();
         }
+
+       
     }
 }
