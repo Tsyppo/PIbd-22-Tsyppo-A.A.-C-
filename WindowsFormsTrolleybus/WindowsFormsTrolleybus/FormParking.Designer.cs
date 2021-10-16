@@ -34,7 +34,7 @@
             this.groupBox = new System.Windows.Forms.GroupBox();
             this.buttonTakeBus = new System.Windows.Forms.Button();
             this.maskedTextBox = new System.Windows.Forms.MaskedTextBox();
-            this.label = new System.Windows.Forms.Label();
+            this.labelPlace = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParking)).BeginInit();
             this.groupBox.SuspendLayout();
             this.SuspendLayout();
@@ -71,7 +71,7 @@
             // 
             this.groupBox.Controls.Add(this.buttonTakeBus);
             this.groupBox.Controls.Add(this.maskedTextBox);
-            this.groupBox.Controls.Add(this.label);
+            this.groupBox.Controls.Add(this.labelPlace);
             this.groupBox.Location = new System.Drawing.Point(1139, 131);
             this.groupBox.Name = "groupBox";
             this.groupBox.Size = new System.Drawing.Size(144, 100);
@@ -96,14 +96,14 @@
             this.maskedTextBox.Size = new System.Drawing.Size(56, 22);
             this.maskedTextBox.TabIndex = 1;
             // 
-            // label
+            // labelPlace
             // 
-            this.label.AutoSize = true;
-            this.label.Location = new System.Drawing.Point(16, 33);
-            this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(53, 17);
-            this.label.TabIndex = 0;
-            this.label.Text = "Место:";
+            this.labelPlace.AutoSize = true;
+            this.labelPlace.Location = new System.Drawing.Point(16, 33);
+            this.labelPlace.Name = "labelPlace";
+            this.labelPlace.Size = new System.Drawing.Size(53, 17);
+            this.labelPlace.TabIndex = 0;
+            this.labelPlace.Text = "Место:";
             // 
             // FormParking
             // 
@@ -131,6 +131,6 @@
         private System.Windows.Forms.GroupBox groupBox;
         private System.Windows.Forms.Button buttonTakeBus;
         private System.Windows.Forms.MaskedTextBox maskedTextBox;
-        private System.Windows.Forms.Label label;
+        private System.Windows.Forms.Label labelPlace;
     }
 }
