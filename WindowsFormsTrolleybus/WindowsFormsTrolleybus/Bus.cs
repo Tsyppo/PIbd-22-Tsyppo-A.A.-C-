@@ -83,7 +83,6 @@ namespace WindowsFormsTrolleybus
                         _startPosY += step;
                     }
                     break;
-
             }
         }
         public override void DrawTransport(Graphics g)
