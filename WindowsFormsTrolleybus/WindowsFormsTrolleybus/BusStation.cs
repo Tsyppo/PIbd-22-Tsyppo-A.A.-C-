@@ -10,12 +10,16 @@ namespace WindowsFormsTrolleybus
  /// Параметризованный класс для хранения набора объектов от интерфейса ITransport
  /// </summary>
  /// <typeparam name="T"></typeparam>
-    public class Parking<T> where T : class, ITransport
+    public class BusStation<T> where T : class, ITransport
     {
         /// <summary>
-        /// Массив объектов, которые храним
+        /// Список объектов, которые храним
         /// </summary>
-        private readonly T[] _places;
+        private readonly List<T> _places;
+        /// <summary>
+        /// Максимальное количество мест на парковке
+        /// </summary>
+        private readonly int _maxCount;
         /// <summary>
         /// Ширина окна отрисовки
         /// </summary>
@@ -38,13 +42,14 @@ namespace WindowsFormsTrolleybus
         /// </summary>
         /// <param name="picWidth">Рамзер парковки - ширина</param>
         /// <param name="picHeight">Рамзер парковки - высота</param>
-        public Parking(int picWidth, int picHeight)
+        public BusStation(int picWidth, int picHeight)
         {
             int width = picWidth / _placeSizeWidth;
             int height = picHeight / _placeSizeHeight;
-            _places = new T[width * height];
+            _maxCount = width * height;
             pictureWidth = picWidth;
             pictureHeight = picHeight;
+            _places = new List<T>();
         }
         /// <summary>
         /// Перегрузка оператора сложения
@@ -53,15 +58,20 @@ namespace WindowsFormsTrolleybus
         /// <param name="p">Парковка</param>
         /// <param name="bus">Добавляемый автобус</param>
         /// <returns></returns>
-        public static int operator +(Parking<T> p, T bus)
+        public static int operator +(BusStation<T> p, T bus)
         {
-            for (int i = 0; i < p._places.Length; i++)
+            if (p._places.Count == p._maxCount)
             {
-                if (p._places[i] == null)
+                return -1;
+            }
+
+            for (int i = 0; i < p._maxCount; i++)
+            {
+                if (!p._places.Contains(bus))
                 {
-                    p._places[i] = bus;
+                    p._places.Add(bus);
                     p._places[i].SetPosition(15 + i % 4 * p._placeSizeWidth, i / 4 * p._placeSizeHeight - 7,
-                    p.pictureWidth, p.pictureHeight );
+                    p.pictureWidth, p.pictureHeight);
                     return i;
                 }
             }
@@ -75,14 +85,14 @@ namespace WindowsFormsTrolleybus
         /// <param name="p">Парковка</param>
         /// <param name="index">Индекс места, с которого пытаемся извлечь объект</param>
         /// <returns></returns>
-        public static T operator - (Parking<T> p, int index)
+        public static T operator - (BusStation<T> p, int index)
         {
-            if (index < p._places.Length)
+            if (p._places.Count < p._maxCount)
             {
                 if (p._places[index] != null)
                 {
                     T bus = p._places[index];
-                    p._places[index] = null;
+                    p._places.RemoveAt(index);
                     return bus;
                 }
             }
@@ -95,12 +105,13 @@ namespace WindowsFormsTrolleybus
         public void Draw(Graphics g)
         {
             DrawMarking(g);
-            for (int i = 0; i < _places.Length; i++)
+            for (int i = 0; i < _places.Count; ++i)
             {
-                _places[i]?.DrawTransport(g);
+                _places[i].SetPosition(15 + i % 4 * _placeSizeWidth, i / 4 * _placeSizeHeight - 7,
+                pictureWidth, pictureHeight);
+                _places[i].DrawTransport(g);
             }
         }
-
         /// <summary>
         /// Метод отрисовки разметки парковочных мест
         /// </summary>
