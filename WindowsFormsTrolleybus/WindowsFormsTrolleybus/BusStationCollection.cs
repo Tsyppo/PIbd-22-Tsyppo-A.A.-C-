@@ -68,7 +68,7 @@ namespace WindowsFormsTrolleybus
         /// Доступ к парковке
         /// </summary>
         /// <param name="ind"></param>
-        /// <returns></returns> 
+        /// <returns></returns>
         public BusStation<Vehicle> this[string ind]
         {
             get

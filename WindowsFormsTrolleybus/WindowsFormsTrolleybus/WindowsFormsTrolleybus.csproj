@@ -59,6 +59,12 @@
     <Compile Include="FormTrolleybus.Designer.cs">
       <DependentUpon>FormTrolleybus.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormTrolleybusConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTrolleybusConfig.Designer.cs">
+      <DependentUpon>FormTrolleybusConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="ITransport.cs" />
     <Compile Include="BusStation.cs" />
     <Compile Include="BusStationCollection.cs" />
@@ -72,6 +78,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormTrolleybus.resx">
       <DependentUpon>FormTrolleybus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTrolleybusConfig.resx">
+      <DependentUpon>FormTrolleybusConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
