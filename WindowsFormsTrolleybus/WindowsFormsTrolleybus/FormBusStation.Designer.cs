@@ -49,7 +49,7 @@
             this.buttonAddBus.Name = "buttonAddBus";
             this.buttonAddBus.Size = new System.Drawing.Size(157, 51);
             this.buttonAddBus.TabIndex = 1;
-            this.buttonAddBus.Text = "Добавить машину";
+            this.buttonAddBus.Text = "Добавить автобус";
             this.buttonAddBus.UseVisualStyleBackColor = true;
             this.buttonAddBus.Click += new System.EventHandler(this.buttonAddBus_Click);
             // 
