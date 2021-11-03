@@ -9,6 +9,8 @@ namespace WindowsFormsTrolleybus
 {
     public class Trolleybus : Bus
     {
+
+        
         /// <summary>
         /// Дополнительный цвет
         /// </summary>
@@ -82,8 +84,14 @@ namespace WindowsFormsTrolleybus
                 g.DrawEllipse(black_pen, _startPosX + 150, _startPosY + 40 - y, 8, 8);
                 g.FillEllipse(br, _startPosX + 150, _startPosY + 40 - y, 8, 8);
             }
-
-            
+        }
+        /// <summary>
+        /// Смена дополнительного цвета
+        /// </summary>
+        /// <param name="color"></param>
+        public void SetDopColor(Color color)
+        {
+            DopColor = color;
         }
     }
 }

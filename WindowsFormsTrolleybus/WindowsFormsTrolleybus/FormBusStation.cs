@@ -97,62 +97,6 @@ namespace WindowsFormsTrolleybus
                 }
             }
         }
-        /// <summary>
-        /// Обработка нажатия кнопки "Припарковать автобус"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonSetBus_Click(object sender, EventArgs e)
-        {
-            if (listBoxBusStation.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    var bus = new Bus(100, 1000, dialog.Color);
-                    if ((busstationCollection[listBoxBusStation.SelectedItem.ToString()] + bus) > -1)
-                    {
-                        Draw();
-                    }
-                    else
-                    {
-
-                        MessageBox.Show("Парковка переполнена");
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Обработка нажатия кнопки "Припарковать троллейбус"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonSetTrolleybus_Click(object sender, EventArgs e)
-        {
-            if (listBoxBusStation.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    ColorDialog dialogDop = new ColorDialog();
-                    if (dialogDop.ShowDialog() == DialogResult.OK)
-                    {
-                        var trollebus = new Trolleybus(100, 1000, dialog.Color,
-                        dialogDop.Color, true, true, true);
-
-                        if ((busstationCollection[listBoxBusStation.SelectedItem.ToString()] + trollebus) > -1)
-                        {
-                            Draw();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Парковка переполнена");
-                        }
-                    }
-                }
-            }
-        }
 
         /// <summary>
         /// Обработка нажатия кнопки "Забрать"
@@ -183,6 +127,36 @@ namespace WindowsFormsTrolleybus
         private void listBoxBusStation_SelectedIndexChanged(object sender, EventArgs e)
         {
             Draw();
+        }
+        /// <summary>
+        /// Обработка нажатия кнопки "Добавить машину"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonAddBus_Click(object sender, EventArgs e)
+        {
+            var formTrolleybusConfig = new FormTrolleybusConfig();
+            formTrolleybusConfig.AddEvent(AddBus);
+            formTrolleybusConfig.Show();
+        }
+
+        /// <summary>
+        /// Метод добавления машины
+        /// </summary>
+        /// <param name="bus"></param>
+        private void AddBus(Vehicle bus)
+        {
+            if (bus != null && listBoxBusStation.SelectedIndex > -1)
+            {
+                if (((busstationCollection[listBoxBusStation.SelectedItem.ToString()]) + bus) != -1)
+                {
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Автобус не удалось поставить");
+                }
+            }
         }
     }
 }
