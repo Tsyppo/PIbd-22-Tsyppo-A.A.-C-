@@ -154,7 +154,7 @@ namespace WindowsFormsTrolleybus
                 }
                 else
                 {
-                    MessageBox.Show("Машину не удалось поставить");
+                    MessageBox.Show("Автобус не удалось поставить");
                 }
             }
         }
