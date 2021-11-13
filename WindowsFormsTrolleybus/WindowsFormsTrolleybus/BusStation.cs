@@ -130,5 +130,18 @@ namespace WindowsFormsTrolleybus
                 (pictureHeight / _placeSizeHeight) * _placeSizeHeight + 10);
             }
         }
+        /// <summary>
+        /// Функция получения элементы из списка
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public T GetNext(int index)
+        {
+            if (index < 0 || index >= _places.Count)
+            {
+                return null;
+            }
+            return _places[index];
+        }
     }
 }

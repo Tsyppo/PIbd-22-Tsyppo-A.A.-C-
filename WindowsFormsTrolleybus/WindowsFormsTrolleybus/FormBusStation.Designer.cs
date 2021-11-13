@@ -39,13 +39,20 @@
             this.buttonAddBusStation = new System.Windows.Forms.Button();
             this.listBoxBusStation = new System.Windows.Forms.ListBox();
             this.buttonDelBusStation = new System.Windows.Forms.Button();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.загрузитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParking)).BeginInit();
             this.groupBox.SuspendLayout();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonAddBus
             // 
-            this.buttonAddBus.Location = new System.Drawing.Point(1126, 289);
+            this.buttonAddBus.Location = new System.Drawing.Point(1127, 309);
             this.buttonAddBus.Name = "buttonAddBus";
             this.buttonAddBus.Size = new System.Drawing.Size(157, 51);
             this.buttonAddBus.TabIndex = 1;
@@ -55,9 +62,9 @@
             // 
             // pictureBoxParking
             // 
-            this.pictureBoxParking.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxParking.Location = new System.Drawing.Point(0, 29);
             this.pictureBoxParking.Name = "pictureBoxParking";
-            this.pictureBoxParking.Size = new System.Drawing.Size(1120, 518);
+            this.pictureBoxParking.Size = new System.Drawing.Size(1120, 509);
             this.pictureBoxParking.TabIndex = 0;
             this.pictureBoxParking.TabStop = false;
             // 
@@ -66,7 +73,7 @@
             this.groupBox.Controls.Add(this.buttonTakeBus);
             this.groupBox.Controls.Add(this.maskedTextBox);
             this.groupBox.Controls.Add(this.labelPlace);
-            this.groupBox.Location = new System.Drawing.Point(1135, 346);
+            this.groupBox.Location = new System.Drawing.Point(1136, 366);
             this.groupBox.Name = "groupBox";
             this.groupBox.Size = new System.Drawing.Size(144, 100);
             this.groupBox.TabIndex = 3;
@@ -102,7 +109,7 @@
             // labelBusStation
             // 
             this.labelBusStation.AutoSize = true;
-            this.labelBusStation.Location = new System.Drawing.Point(1155, 9);
+            this.labelBusStation.Location = new System.Drawing.Point(1156, 29);
             this.labelBusStation.Name = "labelBusStation";
             this.labelBusStation.Size = new System.Drawing.Size(98, 17);
             this.labelBusStation.TabIndex = 4;
@@ -110,14 +117,14 @@
             // 
             // textBoxNewLevelName
             // 
-            this.textBoxNewLevelName.Location = new System.Drawing.Point(1126, 29);
+            this.textBoxNewLevelName.Location = new System.Drawing.Point(1127, 49);
             this.textBoxNewLevelName.Name = "textBoxNewLevelName";
             this.textBoxNewLevelName.Size = new System.Drawing.Size(157, 22);
             this.textBoxNewLevelName.TabIndex = 5;
             // 
             // buttonAddBusStation
             // 
-            this.buttonAddBusStation.Location = new System.Drawing.Point(1126, 57);
+            this.buttonAddBusStation.Location = new System.Drawing.Point(1127, 77);
             this.buttonAddBusStation.Name = "buttonAddBusStation";
             this.buttonAddBusStation.Size = new System.Drawing.Size(157, 45);
             this.buttonAddBusStation.TabIndex = 6;
@@ -129,7 +136,7 @@
             // 
             this.listBoxBusStation.FormattingEnabled = true;
             this.listBoxBusStation.ItemHeight = 16;
-            this.listBoxBusStation.Location = new System.Drawing.Point(1126, 108);
+            this.listBoxBusStation.Location = new System.Drawing.Point(1127, 128);
             this.listBoxBusStation.Name = "listBoxBusStation";
             this.listBoxBusStation.Size = new System.Drawing.Size(153, 100);
             this.listBoxBusStation.TabIndex = 7;
@@ -137,13 +144,57 @@
             // 
             // buttonDelBusStation
             // 
-            this.buttonDelBusStation.Location = new System.Drawing.Point(1126, 214);
+            this.buttonDelBusStation.Location = new System.Drawing.Point(1127, 234);
             this.buttonDelBusStation.Name = "buttonDelBusStation";
             this.buttonDelBusStation.Size = new System.Drawing.Size(153, 30);
             this.buttonDelBusStation.TabIndex = 8;
             this.buttonDelBusStation.Text = "Удалить автовокзал";
             this.buttonDelBusStation.UseVisualStyleBackColor = true;
             this.buttonDelBusStation.Click += new System.EventHandler(this.buttonDelBusStation_Click);
+            // 
+            // menuStrip
+            // 
+            this.menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.файлToolStripMenuItem});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(1291, 28);
+            this.menuStrip.TabIndex = 9;
+            this.menuStrip.Text = "menuStrip1";
+            // 
+            // файлToolStripMenuItem
+            // 
+            this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.сохранитьToolStripMenuItem,
+            this.загрузитьToolStripMenuItem});
+            this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
+            this.файлToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
+            this.файлToolStripMenuItem.Text = "Файл";
+            // 
+            // сохранитьToolStripMenuItem
+            // 
+            this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.сохранитьToolStripMenuItem.Text = "Сохранить";
+            this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
+            // 
+            // загрузитьToolStripMenuItem
+            // 
+            this.загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
+            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.загрузитьToolStripMenuItem.Text = "Загрузить";
+            this.загрузитьToolStripMenuItem.Click += new System.EventHandler(this.загрузитьToolStripMenuItem_Click);
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.FileName = "saveFileDialog";
+            this.saveFileDialog.Filter = "txt file | *.txt";
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
+            this.openFileDialog.Filter = "txt file | *.txt";
             // 
             // FormBusStation
             // 
@@ -158,11 +209,15 @@
             this.Controls.Add(this.groupBox);
             this.Controls.Add(this.buttonAddBus);
             this.Controls.Add(this.pictureBoxParking);
+            this.Controls.Add(this.menuStrip);
+            this.MainMenuStrip = this.menuStrip;
             this.Name = "FormBusStation";
             this.Text = "Парковка";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParking)).EndInit();
             this.groupBox.ResumeLayout(false);
             this.groupBox.PerformLayout();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -181,5 +236,11 @@
         private System.Windows.Forms.Button buttonAddBusStation;
         private System.Windows.Forms.ListBox listBoxBusStation;
         private System.Windows.Forms.Button buttonDelBusStation;
+        private System.Windows.Forms.MenuStrip menuStrip;
+        private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem загрузитьToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog saveFileDialog;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }
