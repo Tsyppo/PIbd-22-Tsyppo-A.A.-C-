@@ -105,7 +105,7 @@ namespace WindowsFormsTrolleybus
                 {
                     //Начинаем парковку
                     sw.WriteLine($"BusStation{separator}{level.Key}{Environment.NewLine}", sw);
-                    /*ITransport bus = null;
+                    ITransport bus = null;
                     for (int i = 0; (bus = level.Value.GetNext(i)) != null; i++)
                     {
                         if (bus != null)
@@ -123,7 +123,6 @@ namespace WindowsFormsTrolleybus
                             }
                         }
                     }
-                    */
                 }
             }
             return true;
@@ -154,7 +153,7 @@ namespace WindowsFormsTrolleybus
                     //если нет такой записи, то это не те данные
                     return false;
                 }
-                /*Vehicle bus = null;
+                Vehicle bus = null;
                 string key = string.Empty;
                 for (int i = 1; (line = sr.ReadLine()) != null; ++i)
                 {
@@ -184,7 +183,7 @@ namespace WindowsFormsTrolleybus
                     }
 
                 }
-                */
+             
             }
             return true;
         }
