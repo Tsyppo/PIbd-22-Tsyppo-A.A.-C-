@@ -60,9 +60,9 @@ namespace WindowsFormsTrolleybus
         /// <returns></returns>
         public static int operator +(BusStation<T> p, T bus)
         {
-            if (p._places.Count == p._maxCount)
+            if (p._places.Count >= p._maxCount)
             {
-                return -1;
+                throw new BusStationOverflowException();
             }
 
             for (int i = 0; i < p._maxCount; i++)
@@ -87,6 +87,11 @@ namespace WindowsFormsTrolleybus
         /// <returns></returns>
         public static T operator - (BusStation<T> p, int index)
         {
+            if (index < -1 || index > p._places.Count)
+            {
+                throw new BusStationNotFoundException(index);
+            }
+
             if (p._places.Count < p._maxCount)
             {
                 if (p._places[index] != null)
