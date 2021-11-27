@@ -152,7 +152,7 @@ namespace WindowsFormsTrolleybus
                 else
                 {
                     //если нет такой записи, то это не те данные
-                    throw new ArgumentException("Неверный формат файла");
+                    throw new FileFormatException("Неверный формат файла");
                 }
                 Vehicle bus = null;
                 string key = string.Empty;
