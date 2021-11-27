@@ -45,6 +45,7 @@ namespace WindowsFormsTrolleybus
             this.pictureWidth = pictureWidth;
             this.pictureHeight = pictureHeight;
         }
+        
         /// <summary>
         /// Добавление парковки
         /// </summary>
@@ -100,11 +101,11 @@ namespace WindowsFormsTrolleybus
             }
             using (StreamWriter sw = new StreamWriter(filename))
             {
-                sw.WriteLine($"BusStationCollection{Environment.NewLine}", sw);
+                sw.WriteLine($"BusStationCollection");
                 foreach (var level in parkingStages)
                 {
                     //Начинаем парковку
-                    sw.WriteLine($"BusStation{separator}{level.Key}{Environment.NewLine}", sw);
+                    sw.WriteLine($"BusStation{separator}{level.Key}", sw);
                     ITransport bus = null;
                     for (int i = 0; (bus = level.Value.GetNext(i)) != null; i++)
                     {
@@ -115,11 +116,11 @@ namespace WindowsFormsTrolleybus
                             //Записываемые параметры
                             if (bus.GetType().Name == "Bus")
                             {
-                                sw.WriteLine($"Bus{separator}" + bus + Environment.NewLine, sw);
+                                sw.WriteLine($"Bus{separator}" + bus, sw);
                             }
                             if (bus.GetType().Name == "Trolleybus")
                             {
-                                sw.WriteLine($"Trolleybus{separator}" + bus + Environment.NewLine, sw);
+                                sw.WriteLine($"Trolleybus{separator}" + bus, sw);
                             }
                         }
                     }
@@ -137,7 +138,7 @@ namespace WindowsFormsTrolleybus
         {
             if (!File.Exists(filename))
             {
-                return false;
+                throw new FileNotFoundException();
             }
 
             using (StreamReader sr = new StreamReader(filename, Encoding.UTF8))
@@ -151,7 +152,7 @@ namespace WindowsFormsTrolleybus
                 else
                 {
                     //если нет такой записи, то это не те данные
-                    return false;
+                    throw new FileFormatException("Неверный формат файла");
                 }
                 Vehicle bus = null;
                 string key = string.Empty;
@@ -178,7 +179,7 @@ namespace WindowsFormsTrolleybus
                         var result = parkingStages[key] + bus;
                         if (!(result == 0))
                         {
-                            return false;
+                            throw new BusStationOverflowException();
                         }
                     }
 
