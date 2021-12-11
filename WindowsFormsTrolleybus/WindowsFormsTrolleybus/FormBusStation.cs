@@ -196,6 +196,11 @@ namespace WindowsFormsTrolleybus
                 MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
             }
+            catch (BusStationAlreadyHaveException ex)
+            {
+                MessageBox.Show(ex.Message, "Дублирование", MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Неизвестная ошибка",
@@ -244,6 +249,16 @@ namespace WindowsFormsTrolleybus
                     MessageBox.Show(ex.Message, "Неизвестная ошибка при загрузке",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+        }
+
+        private void buttonSort_Click(object sender, EventArgs e)
+        {
+            if (listBoxBusStation.SelectedIndex > -1)
+            {
+                busstationCollection[listBoxBusStation.SelectedItem.ToString()].Sort();
+                Draw();
+                logger.Info("Сортировка уровней");
             }
         }
     }
