@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Collections;
 
 namespace WindowsFormsTrolleybus
 {/// <summary>
  /// Параметризованный класс для хранения набора объектов от интерфейса ITransport
  /// </summary>
  /// <typeparam name="T"></typeparam>
-    public class BusStation<T> where T : class, ITransport
+    public class BusStation<T> : IEnumerator<T>, IEnumerable<T> where T : class, ITransport
     {
         /// <summary>
         /// Список объектов, которые храним
@@ -38,6 +39,14 @@ namespace WindowsFormsTrolleybus
         private readonly int _placeSizeHeight = 97;
 
         /// <summary>
+        /// Текущий элемент для вывода через IEnumerator (будет обращаться по своему индексу к ключу словаря, по которму будет возвращаться запись)
+        /// </summary>
+        
+        private int _currentIndex;
+        public T Current => _places[_currentIndex];
+        object IEnumerator.Current => _places[_currentIndex];
+
+        /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="picWidth">Рамзер парковки - ширина</param>
@@ -50,6 +59,7 @@ namespace WindowsFormsTrolleybus
             pictureWidth = picWidth;
             pictureHeight = picHeight;
             _places = new List<T>();
+            _currentIndex = -1;
         }
         /// <summary>
         /// Перегрузка оператора сложения
@@ -64,7 +74,10 @@ namespace WindowsFormsTrolleybus
             {
                 throw new BusStationOverflowException();
             }
-
+            if (p._places.Contains(bus))
+            {
+                throw new BusStationAlreadyHaveException();
+            }
             for (int i = 0; i < p._maxCount; i++)
             {
                 if (!p._places.Contains(bus))
@@ -147,6 +160,55 @@ namespace WindowsFormsTrolleybus
                 return null;
             }
             return _places[index];
+        }
+
+        /// <summary>
+        /// Сортировка автомобилей на парковке
+        /// </summary>
+        public void Sort() => _places.Sort((IComparer<T>)new BusComparer());
+
+        /// <summary>
+        /// Метод интерфейса IEnumerator, вызываемый при удалении объекта
+        /// </summary>
+        public void Dispose()
+        {
+        }
+
+        /// <summary>
+        /// Метод интерфейса IEnumerator для перехода к следующему элементу или началу коллекции
+        /// </summary>
+        /// <returns></returns>
+        public bool MoveNext()
+        {
+            // Реализовать логику
+            _currentIndex++;
+            if (_currentIndex >= _places.Count)
+            {
+                Reset();
+                return false;
+            }
+            return true;
+        }
+        /// <summary>
+        /// Метод интерфейса IEnumerator для сброса и возврата к началу коллекции
+        /// </summary>
+        public void Reset()
+        {
+            _currentIndex = -1;
+        }
+        /// <summary>
+        /// Метод интерфейса IEnumerable
+        /// </summary>
+        public IEnumerator<T> GetEnumerator()
+        {
+            return this;
+        }
+        /// <summary>
+        /// Метод интерфейса IEnumerable
+        /// </summary>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this;
         }
     }
 }

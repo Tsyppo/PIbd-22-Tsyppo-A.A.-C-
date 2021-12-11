@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace WindowsFormsTrolleybus
 {
-    public class Trolleybus : Bus
+    public class Trolleybus : Bus, IEquatable<Trolleybus>
     {
         /// <summary>
         /// Дополнительный цвет
@@ -36,7 +36,7 @@ namespace WindowsFormsTrolleybus
         /// <param name="sideLine">Признак наличия боковых линий</param>
         /// <param name="barbell">Признак наличия боковых линий</param>
         public Trolleybus(int maxSpeed, float weight, Color mainColor, Color dopColor,
-            bool headlights, bool sideLine, bool barbell) : base(maxSpeed, weight, mainColor, 140, 103) 
+            bool headlights, bool sideLine, bool barbell) : base(maxSpeed, weight, mainColor, 140, 103)
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
@@ -77,7 +77,7 @@ namespace WindowsFormsTrolleybus
             //Штанга троллейбуса
             if (Barbell)
             {
-                g.DrawLine(black_pen, _startPosX + 40, _startPosY - y , _startPosX - 10, _startPosY - 30 - y);
+                g.DrawLine(black_pen, _startPosX + 40, _startPosY - y, _startPosX - 10, _startPosY - 30 - y);
                 g.DrawLine(black_pen, _startPosX + 45, _startPosY - y, _startPosX - 5, _startPosY - 30 - y);
             }
             base.DrawTransport(g);
@@ -91,7 +91,7 @@ namespace WindowsFormsTrolleybus
                 g.DrawRectangle(black_pen, _startPosX + 65, _startPosY + 30 - y, 95, 10);
                 g.FillRectangle(br_dop, _startPosX + 66, _startPosY + 31 - y, 94, 9);
             }
-        
+
             // Фары
             if (Headlights)
             {
@@ -114,5 +114,59 @@ namespace WindowsFormsTrolleybus
             return
             $"{base.ToString()}{separator}{DopColor.Name}{separator}{Headlights}{separator}{SideLine}{separator}{Barbell}";
         }
+
+        /// <summary>
+        /// Метод интерфейса IEquatable для класса SportCar
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool Equals(Trolleybus other)
+        {
+            var res = base.Equals(other);
+            if (!res)
+            {
+                return false;
+            }
+            if (GetType().Name != other.GetType().Name)
+            {
+                return false;
+            }
+            if (DopColor != other.DopColor)
+            {
+                return false;
+            }
+            if (Headlights != other.Headlights)
+            {
+                return false;
+            }
+            if (SideLine != other.SideLine)
+            {
+                return false;
+            }
+            if (Barbell != other.Barbell)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (!(obj is Trolleybus busObj))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(busObj);
+            }
+        }
+
     }
 }
+

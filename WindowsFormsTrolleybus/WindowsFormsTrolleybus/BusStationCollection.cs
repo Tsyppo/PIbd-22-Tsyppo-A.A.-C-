@@ -106,22 +106,19 @@ namespace WindowsFormsTrolleybus
                 {
                     //Начинаем парковку
                     sw.WriteLine($"BusStation{separator}{level.Key}", sw);
-                    ITransport bus = null;
-                    for (int i = 0; (bus = level.Value.GetNext(i)) != null; i++)
-                    {
-                        if (bus != null)
+                    
+                    foreach (ITransport bus in level.Value)
+                    {   
+                        //если место не пустое
+                        //Записываем тип машины  
+                        //Записываемые параметры
+                        if (bus.GetType().Name == "Bus")         
+                        {        
+                            sw.WriteLine($"Bus{separator}" + bus, sw);      
+                        }    
+                        if (bus.GetType().Name == "Trolleybus")                   
                         {
-                            //если место не пустое
-                            //Записываем тип машины
-                            //Записываемые параметры
-                            if (bus.GetType().Name == "Bus")
-                            {
-                                sw.WriteLine($"Bus{separator}" + bus, sw);
-                            }
-                            if (bus.GetType().Name == "Trolleybus")
-                            {
-                                sw.WriteLine($"Trolleybus{separator}" + bus, sw);
-                            }
+                            sw.WriteLine($"Trolleybus{separator}" + bus, sw);
                         }
                     }
                 }
